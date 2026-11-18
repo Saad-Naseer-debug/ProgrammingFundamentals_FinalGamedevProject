@@ -1,0 +1,2 @@
+﻿  game_project.cpp
+LINK : fatal error LNK1104: cannot open file 'D:\uni\2026\Fall\Programming_Fundamentals\Assignments\game_project\game_project\x64\Release\game_project.exe'
