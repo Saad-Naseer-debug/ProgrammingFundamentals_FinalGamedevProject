@@ -4,24 +4,35 @@ Contributors
 - Ghulam Rasool (26L-0694)
 - Muhammad Bilal (26L-0706)
 
-Project Work
-The project has been developed by the contributors themselves. 
-Online sources and AI tools were used for guidance and assistance and help during development. 
-Game asset was created by the contributor, while others were obtained from online sources or AI tools.
-
 How to Run the Project
 
 Follow these steps to download and run the game:
 
 1. Download and install Visual Studio 2022.
 2. During installation, select the Desktop development with C++ workload.
-3. Download the project ZIP file from GitHub.
+3. Download the project ZIP file from release version.
 4. Extract the ZIP file to your computer.
 5. Open the extracted project folder.
 6. Locate the .sln (Visual Studio Solution) file.
 7. Double click the .sln file to open the project in Visual Studio.
 8. Once the project has loaded, click the Local Windows Debugger button or press Ctrl + F5 to run the game.
 9. Enjoy playing!
+
+Features
+1-Beautiful visuals
+2-Hovering pie left and right
+3-File handling (coming)
+4-Visually pleasing main screen
+5-Game over Screen (coming)
+6-File handling (coming)
+7-Working button
+8-Repeating pie
+9-Working Game
+
+Project Work
+The project has been developed by the contributors themselves. 
+Online sources and AI tools were used for guidance and assistance and help during development. 
+Game asset was created by the contributor, while others were obtained from online sources or AI tools.
 
 Acknowledgements
 We acknowledge the use of online resources and AI tools for learning, guidance, and assistance , and help, as well as online assets used in the project. 
