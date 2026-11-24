@@ -1,8 +1,8 @@
-
 #include <algorithm>
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <vector>
+#include <fstream>
 using namespace std;
 
 int Level(sf::RenderWindow& window)
@@ -25,6 +25,22 @@ int Level(sf::RenderWindow& window)
 
     sf::Sprite sprite(texture);
     sprite.setScale({800.f/texture.getSize().x,600.f/texture.getSize().y});
+
+    sf::Font font("C:/Windows/Fonts/arialbd.ttf");
+    sf::Text endText(font, "", 60);
+    bool gameOver = false;
+
+    int score = 0;
+    int bestScore = 0;
+    ifstream inFile("best_score.txt");
+    if (inFile)
+    {
+        inFile >> bestScore;
+    }
+    inFile.close();
+    sf::Text scoreText(font, "", 30);
+    scoreText.setFillColor(sf::Color::Red);
+    scoreText.setPosition({ 10.f, 10.f });
 
     bool moving = true;
     sf::Clock clock;
@@ -67,9 +83,33 @@ int Level(sf::RenderWindow& window)
 
                                 pies.push_back(newPie);
 
-                                moving = true;
+                                score++;
+                                if (score > bestScore)
+                                {
+                                    bestScore = score;
+                                    ofstream outFile("best_score.txt");
+                                    outFile << bestScore;
+                                    outFile.close();
+                                }
+
+                                if (newY <= 0.f)
+                                {
+                                    gameOver = true;
+                                    endText.setString("GAME FINISHED");
+                                    endText.setFillColor(sf::Color::Green);
+                                }
+                                else
+                                {
+                                    moving = true;
+                                }
                             }
-                           
+                            else
+                            {
+                                gameOver = true;
+                                endText.setString("GAME OVER");
+                                endText.setFillColor(sf::Color::Red);
+                            }
+
                         }
                         else
                         {
@@ -115,6 +155,15 @@ int Level(sf::RenderWindow& window)
             {
                 window.draw(pies[i]);
             }
+            if (gameOver)
+            {
+                sf::FloatRect textBounds = endText.getLocalBounds();
+                endText.setOrigin({ textBounds.position.x + textBounds.size.x / 2.f,textBounds.position.y + textBounds.size.y / 2.f });
+                endText.setPosition({ 400.f, 300.f });
+                window.draw(endText);
+            }
+            scoreText.setString("Score: " + to_string(score) + "\nBest: " + to_string(bestScore));
+            window.draw(scoreText);
             window.display();
             clock.restart();
         }
