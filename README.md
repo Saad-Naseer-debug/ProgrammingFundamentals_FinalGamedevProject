@@ -9,7 +9,7 @@ How to Run the Project
 Follow these steps to download and run the game:
 1- Download and install Visual Studio 2022.
 2- During installation, select the Desktop development with C++ workload.
-3- Download the project ZIP file from release version.
+3- Download the project ZIP file from repository.(updated : previously it was in releases to show incomplete work)
 4- Extract the ZIP file to your computer.
 5- Open the extracted project folder.
 6- Locate the .sln (Visual Studio Solution) file.
