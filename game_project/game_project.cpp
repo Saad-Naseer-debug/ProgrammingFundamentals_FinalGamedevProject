@@ -6,7 +6,7 @@ int Level(sf::RenderWindow& window);
 int main()
 {
  
-    sf::RenderWindow window(sf::VideoMode({ 800, 600 }),"STACK THE PIE");
+    sf::RenderWindow window(sf::VideoMode::getDesktopMode(), "STACK THE PIE", sf::State::Fullscreen);
 
    
     sf::Texture texture;
@@ -16,10 +16,14 @@ int main()
     }
 
  
+    float screenWidth = static_cast<float>(window.getSize().x);
+    float screenHeight = static_cast<float>(window.getSize().y);
+
     sf::Sprite sprite(texture);
-    sprite.setScale({800.f / texture.getSize().x,600.f / texture.getSize().y});
+    sprite.setScale({screenWidth / texture.getSize().x,screenHeight / texture.getSize().y});
     sf::RectangleShape button({ 200.f, 60.f });
-    button.setPosition({ 300.f, 250.f });
+    button.setPosition({screenWidth / 2.f - 100.f,screenHeight / 2.f - 30.f
+        });
     button.setFillColor(sf::Color::Red);
 
     sf::Font font("C:/Windows/Fonts/arial.ttf");
@@ -31,12 +35,14 @@ int main()
     buttonText.setOrigin({ textBounds.position.x + textBounds.size.x / 2.f,textBounds.position.y + textBounds.size.y / 2.f });
 
     sf::Font boldFont("C:/Windows/Fonts/arialbd.ttf");
-    buttonText.setPosition({ 400.f, 280.f });
+    buttonText.setPosition({screenWidth / 2.f,screenHeight / 2.f
+        });
     sf::Text buttonText2(boldFont, "STACK THE PIE", 50);
     sf::FloatRect titleBounds = buttonText2.getLocalBounds();
 
     buttonText2.setOrigin({ titleBounds.position.x + titleBounds.size.x / 2.f,titleBounds.position.y + titleBounds.size.y / 2.f });
-    buttonText2.setPosition({ 400.f, 70.f });
+    buttonText2.setPosition({screenWidth / 2.f, screenHeight * 0.12f
+        });
     buttonText2.setFillColor(sf::Color::Black);
 
    
@@ -53,7 +59,10 @@ int main()
             {
                 if (mouse->button == sf::Mouse::Button::Left)
                 {
-                    sf::Vector2f mousePosition( static_cast<float>(mouse->position.x),static_cast<float>(mouse->position.y));
+                    sf::Vector2i pixelPosition = mouse->position;
+
+                    sf::Vector2f mousePosition =
+                        window.mapPixelToCoords(pixelPosition);
 
                     if (button.getGlobalBounds().contains(mousePosition))
                     {
